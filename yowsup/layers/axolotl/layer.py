@@ -544,7 +544,7 @@ class YowAxolotlLayer(YowProtocolLayer):
     def serializeImageToProtobuf(self, mediaNode):
         m = Message()
         image_message = ImageMessage()
-        image_message.url = mediaNode["url"]
+        image_message.url = str(mediaNode["url"])
         image_message.width = int(mediaNode["width"])
         image_message.height = int(mediaNode["height"])
         image_message.mime_type = mediaNode["mimetype"]
@@ -552,7 +552,7 @@ class YowAxolotlLayer(YowProtocolLayer):
         image_message.file_length = int(mediaNode["size"])
         image_message.caption = mediaNode["caption"] or ""
         image_message.jpeg_thumbnail = mediaNode.getData()
-
+        image_message.media_key = "image"
         m.image_message.MergeFrom(image_message)
         return m.SerializeToString()
 
